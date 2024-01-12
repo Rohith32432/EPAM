@@ -37,6 +37,6 @@
    - `git tag`: List all tags.
    - `git push origin <tag_name>`: Push a specific tag to the remote repository.
 
-7. **Removing**
-   -:Remove Git Repository (Keep Files):
-   -`git rm -r path/to/directory || Remove-Item -Recurse -Force .git` 
+7. **Removing:**
+   -:Remove Git Repository (Keep Files)
+   -:`git rm -r path/to/directory || Remove-Item -Recurse -Force .git` 
