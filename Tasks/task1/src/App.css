@@ -12,6 +12,60 @@
     animation: App-logo-spin infinite 20s linear;
   }
 }
+/* Table Styles */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+/* Header Styles */
+th {
+  background-color: #f2f2f2;
+  padding: 10px;
+  text-align: left;
+  border: 1px solid #dddddd;
+}
+
+/* Cell Styles */
+td {
+  padding: 10px;
+  border: 1px solid #dddddd;
+}
+
+/* Image Styles */
+td img {
+  max-width: 50px; /* Adjust the max-width as needed */
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+/* Capital Cell Styles */
+td.capital {
+  font-weight: bold;
+}
+
+/* Language Cell Styles */
+td.languages {
+  font-style: italic;
+  color: #555;
+}
+
+/* Region Cell Styles */
+td.region {
+  text-transform: uppercase;
+}
+
+/* Alternate Row Styles */
+tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+/* Hover Effect Styles */
+tr:hover {
+  background-color: #e0e0e0;
+}
 
 .App-header {
   background-color: #282c34;
