@@ -24,34 +24,35 @@ function App() {
     if (lst.length == 0) lst = region.getCountryListByLanguage(e.target.value)
     setdata(lst)
   }
- const [count,setcount]=useState(0)
-  const handelSort = (c) => {
-    if(c==1){
+ const [count,setcount]=useState(1)
+  const handelSort = (p) => {
+    if(count){
     const sortedData = [...data].sort((a, b) => {
-      const nameA = a.name.toLowerCase(); 
-      const nameB = b.name.toLowerCase();
-  
+      let nameA = null; 
+      let nameB = null;
+      {p=='name'? nameA=a.name:nameA=a.area}
+      {p=='name'? nameB=b.name:nameB=b.area}
       if (nameA < nameB) {
         return -1;  
       }
     });
+    setcount(count-1)
     setdata(sortedData);
   }
-  if(c!=1){
+  else{
     const nsortedData = [...data].sort((a, b) => {
-      const nameA = a.name.toLowerCase(); 
-      const nameB = b.name.toLowerCase();
-  
+      let nameA = null; 
+      let nameB = null;
+      {p=='name'? nameA=a.name:nameA=a.area}
+      {p=='name'? nameB=b.name:nameB=b.area}
       if (nameA > nameB) {
         return -1;  
       }
     });
+    setcount(count+1)
     setdata(nsortedData);
   }
-   
-  
-    setcount(count+1)
-    console.log(c);
+ 
   };
   
   return (
@@ -93,11 +94,11 @@ function App() {
       <table>
         <thead>
         <tr>
-          <th>name <button onClick={()=>handelSort(count+1)}>{count==0 ? 'A':'D'}</button></th>
+          <th>name <button onClick={()=>handelSort('name')}>{count==0 ? 'D':'A'}</button></th>
           <th>captal</th>
           <th>world region</th>
           <th>langvage</th>
-          <th>area <button onClick={()=>handelSort(count+1)}>{count==0 ? 'A':'D'}</button></th>
+          <th>area <button onClick={()=>handelSort('area')}>{count==0 ? 'A':'D'}</button></th>
           <th>flag</th>
         </tr>
   </thead>
