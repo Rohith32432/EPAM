@@ -5,12 +5,13 @@ import Listtweets from './ListTweets'
 function Tweet() {
     const [status,setstatus] =useState(true)
     const [data,setdata]=useState([])
-
     const addData = (updata)=>{
         if(!data.includes(updata))
             setdata([...data,updata])
         
     }
+    console.log(data);
+  
     console.log(data);
   return (
     <>
@@ -23,7 +24,7 @@ function Tweet() {
 				<button className="addTweet"onClick={()=>{ setstatus(false)}} >Add tweet</button>
             
 			</div>
-        {data.map((e,i)=>(<Listtweets key={i} show={e} ack={setstatus} />))}
+        {data.map((e,i)=>(<Listtweets key={i} show={e} data={data} addData={setdata} />))}
 
             </div>:<AddTweet addtweet={addData}  ack={setstatus} />
            
