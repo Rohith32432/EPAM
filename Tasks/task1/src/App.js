@@ -24,41 +24,42 @@ function App() {
     if (lst.length == 0) lst = region.getCountryListByLanguage(e.target.value)
     setdata(lst)
   }
- const [count,setcount]=useState(1)
+  const [count, setcount] = useState(1)
   const handelSort = (p) => {
-    if(count){
-    const sortedData = [...data].sort((a, b) => {
-      let nameA = null; 
-      let nameB = null;
-      {p=='name'? nameA=a.name:nameA=a.area}
-      {p=='name'? nameB=b.name:nameB=b.area}
-      if (nameA < nameB) {
-        return -1;  
-      }
-    });
-    setcount(count-1)
-    setdata(sortedData);
-  }
-  else{
-    const nsortedData = [...data].sort((a, b) => {
-      let nameA = null; 
-      let nameB = null;
-      {p=='name'? nameA=a.name:nameA=a.area}
-      {p=='name'? nameB=b.name:nameB=b.area}
-      if (nameA > nameB) {
-        return -1;  
-      }
-    });
-    setcount(count+1)
-    setdata(nsortedData);
-  }
- 
+    if (count) {
+      const sortedData = [...data].sort((a, b) => {
+        let nameA = null;
+        let nameB = null;
+        { p == 'name' ? nameA = a.name : nameA = a.area }
+        { p == 'name' ? nameB = b.name : nameB = b.area }
+        if (nameA < nameB) {
+          return -1;
+        }
+      });
+      setcount(count - 1)
+      setdata(sortedData);
+    }
+    else {
+      const nsortedData = [...data].sort((a, b) => {
+        let nameA = null;
+        let nameB = null;
+        { p == 'name' ? nameA = a.name : nameA = a.area }
+        { p == 'name' ? nameB = b.name : nameB = b.area }
+        if (nameA > nameB) {
+          return -1;
+        }
+      });
+      setcount(count + 1)
+      setdata(nsortedData);
+    }
+
   };
-  
+
   return (
-    <div className='App'> 
+    <div className='App'>
       <h1>Countries Search</h1>
       <div>
+        <>please choose type of search</>
         <input
           type="radio"
           name="category"
@@ -78,7 +79,7 @@ function App() {
           onChange={handlelang}
         />
         <label htmlFor="lang">Language</label>
-
+    <p>please choose type of qurey</p>
         <select onChange={handlechange} disabled={!show}>
           <option value="">slect value</option>
           {show ?
@@ -93,16 +94,16 @@ function App() {
       </div>
       <table>
         <thead>
-        <tr>
-          <th>name <button onClick={()=>handelSort('name')}>{count==0 ? 'D':'A'}</button></th>
-          <th>captal</th>
-          <th>world region</th>
-          <th>langvage</th>
-          <th>area <button onClick={()=>handelSort('area')}>{count==0 ? 'A':'D'}</button></th>
-          <th>flag</th>
-        </tr>
-  </thead>
-        {data.map((e,i) => (
+          <tr>
+            <th>name <button onClick={() => handelSort('name')}>{count == 0 ? 'D' : 'A'}</button></th>
+            <th>captal</th>
+            <th>world region</th>
+            <th>langvage</th>
+            <th>area <button onClick={() => handelSort('area')}>{count == 0 ? 'D' : 'A'}</button></th>
+            <th>flag</th>
+          </tr>
+        </thead>
+        {data.map((e, i) => (
 
           <tr key={i}>{[
             <td>{e.name}</td>,

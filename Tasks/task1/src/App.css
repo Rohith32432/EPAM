@@ -21,9 +21,10 @@ table {
 
 /* Header Styles */
 th {
-  background-color: #57ee54;
+  background-color: #e14700;
   padding: 10px;
   text-align: center;
+  color: white;
   border: 1px solid #dddddd;
 }
 
