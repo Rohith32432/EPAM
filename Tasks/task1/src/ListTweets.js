@@ -2,7 +2,7 @@ import React from 'react'
 
 function Listtweets({show,ack}) {
   const handleedit=(e)=>{
-    ack(false)
+    // ack(false)
     console.log(e.target.textContent);
   }
   return (
