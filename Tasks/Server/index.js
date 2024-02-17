@@ -1,50 +1,47 @@
-const express=require('express')
+const express = require('express');
+const fs = require('fs');
 
-const fs =require('fs')
+const server = express();
+server.use(express.json());
 
-const server=express()
-server.use(express.json())
+const pwd = new Set(); // Using Set to avoid duplicate passwords
 
-const path='file1.txt'
-const content='sample data using for creating file in node'
+const check = (req, res, next) => {
+    const password = req.query.pwd;
+    if (password !== '') {
+        if (pwd.has(password)) {
+            next();
+        } else {
+            res.send('Incorrect password');
+        }
+    } else {
+        res.send('Please provide a password');
+    }
+};
 
-// fs.writeFile(path,content,(err)=>{
-//     if(err) console.log('error ocuured',err);
-//     else console.log('file created');
-//      return
-// })
+server.get('/', check, (req, res) => {
+    const data = 'accessible';
+    res.send(data);
+});
 
-const pwd=[]
+server.post('/', (req, res) => {
+    const { name, content, password } = req.body;
+    if (password !== '') {
+        pwd.add(password);
+        fs.writeFile(`${name}.txt`, content, (err) => {
+            if (err) {
+                console.error(err);
+                res.status(500).send('Error creating file');
+            } else {
+                console.log('File created');
+                res.json('File created successfully');
+            }
+        });
+    } else {
+        res.status(400).send('Please provide a password');
+    }
+});
 
-const check=(req,res,next)=>{
-    const password=req.query.pwd
-  if(password!==' ') {
-      pwd.find((e)=>e==password) 
-
-      next()
-  }
-  else {
-
-      res.send('password not match')
-  }
-}
-server.get('/',check,(req,res)=>{
-    const data='acessable'
-    res.send(data)
-})
-
-server.post('/',(req,res)=>{
-    
-    const {name,content,password}=req.body
-    if(password!==' ') pwd.push(password) 
-     fs.writeFile(`${name}.txt`,content,(err)=>{
-        if(err) console.log(err);
-        else console.log('file created');
-     })
-
-    res.json('file created sucessful')
-})
-
-server.listen(2024,()=>{
-    console.log('server listned at 2024');
-})
+server.listen(2024, () => {
+    console.log('Server listening at 2024');
+});
