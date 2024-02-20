@@ -30,8 +30,7 @@ function Tweet() {
     return (
         <>
             <div className="App">
-                { !likedst?
-            <>
+              
                             {  status ?
 
                     <div id="tweetItems" className="listPage">
@@ -40,24 +39,25 @@ function Tweet() {
                             <button className="addTweet" onClick={() => { setstatus(false) }} >Add tweet</button>
                             {
                                 likeddata.length > 0 ?
-                                    <button onClick={() => { setlikedst(true) }} >Liked</button> : ""
+                                    <button onClick={() => { setlikedst(true) || setstatus(false)}} >Liked</button> : ""
                             }
+                            {likedst ? <button>heloo</button>:""}
                         </div>
 
                         {
                             data.map((e, i) => (<Listtweets key={i} index={i} show={e} data={data} addData={setdata} idx={getliked} ridx={remove} />))
                             }
 
-                    </div> : <AddTweet addtweet={addData} ack={setstatus} />
-
+                    </div> :  !likedst ?<AddTweet addtweet={addData} ack={setstatus} />:
+                    
+                likeddata.map((e,i)=>(
+                    console.log(e),
+                    <LikedTweets  key={i} ldata={e}/>
+                ))
+               
                 }
+                
 
-            </>
-            : 
-             likeddata.map((e,i)=>(
-                <LikedTweets  key={i} ldata={e}/>
-            ))
-              }
             </div>
 
         </>

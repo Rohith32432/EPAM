@@ -11,8 +11,6 @@ function LikedTweets({ldata}) {
       <button >unlike</button>
 
     </div>
-   
-  
   
   </div>
   )
