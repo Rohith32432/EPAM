@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import AddTweet from './addTweet'
 import Listtweets from './ListTweets'
-
+import LikedTweets from './LikedTweets'
 function Tweet() {
     const [status, setstatus] = useState(true)
     const [data, setdata] = useState([])
@@ -10,17 +10,18 @@ function Tweet() {
             setdata([...data, updata])
 
     }
-    console.log(data);
+    // console.log(data);
 
+    const [likedst, setlikedst] = useState(false)
     const [likeddata, setliked] = useState([])
     function getliked(id) {
         console.log(id);
         setliked([...likeddata, data[id]])
     }
+    // console.log(likeddata);
     // const viewliked=()=>{
 
     // }
-    const [likedst, setlikedst] = useState(false)
     function remove(id) {
         const newData = data.filter((_, index) => index !== id);
         setdata(newData);
@@ -29,8 +30,9 @@ function Tweet() {
     return (
         <>
             <div className="App">
-
-                {  status ?
+                { !likedst?
+            <>
+                            {  status ?
 
                     <div id="tweetItems" className="listPage">
                         <h1>Simple Twitter</h1>
@@ -50,7 +52,14 @@ function Tweet() {
 
                 }
 
+            </>
+            : 
+             likeddata.map((e,i)=>(
+                <LikedTweets  key={i} ldata={e}/>
+            ))
+              }
             </div>
+
         </>
     )
 }

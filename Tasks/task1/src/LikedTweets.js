@@ -1,8 +1,20 @@
 import React from 'react'
 
-function LikedTweets() {
+function LikedTweets({ldata}) {
   return (
-    <div>LikedTweets</div>
+    <div  >
+     
+    <div style={{'display':'flex','justifyContent':'space-around',alignItems:'center'}} >
+    
+
+      <h4  >{ldata}</h4>,
+      <button >unlike</button>
+
+    </div>
+   
+  
+  
+  </div>
   )
 }
 
