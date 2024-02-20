@@ -19,9 +19,9 @@ function Tweet() {
         setliked([...likeddata, data[id]])
     }
     // console.log(likeddata);
-    // const viewliked=()=>{
-
-    // }
+    const viewliked=(i)=>{
+        setlikedst(i)
+    }
     function remove(id) {
         const newData = data.filter((_, index) => index !== id);
         setdata(newData);
@@ -30,7 +30,8 @@ function Tweet() {
     return (
         <>
             <div className="App">
-              
+                { !likedst?
+            <>
                             {  status ?
 
                     <div id="tweetItems" className="listPage">
@@ -39,25 +40,24 @@ function Tweet() {
                             <button className="addTweet" onClick={() => { setstatus(false) }} >Add tweet</button>
                             {
                                 likeddata.length > 0 ?
-                                    <button onClick={() => { setlikedst(true) || setstatus(false)}} >Liked</button> : ""
+                                    <button onClick={() => { setlikedst(true) }} >Liked</button> : ""
                             }
-                            {likedst ? <button>heloo</button>:""}
                         </div>
 
                         {
                             data.map((e, i) => (<Listtweets key={i} index={i} show={e} data={data} addData={setdata} idx={getliked} ridx={remove} />))
                             }
 
-                    </div> :  !likedst ?<AddTweet addtweet={addData} ack={setstatus} />:
-                    
-                likeddata.map((e,i)=>(
-                    console.log(e),
-                    <LikedTweets  key={i} ldata={e}/>
-                ))
-               
-                }
-                
+                    </div> : <AddTweet addtweet={addData} ack={setstatus} />
 
+                }
+
+            </>
+            : 
+             
+                <LikedTweets data={likeddata}  ack={viewliked}/>
+        
+              }
             </div>
 
         </>
