@@ -5,11 +5,12 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 
 import Exam from './Exam';
+import Sample from './sample';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <Exam/>
+    <Sample/>
   </React.StrictMode>
 );
 
