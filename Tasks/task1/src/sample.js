@@ -3,24 +3,26 @@ import React, { useEffect, useState } from 'react';
 function Sample() {
   const [pokemon, setPokemon] = useState({});
   const [status, setStatus] = useState(false);
+  const [load, setload] = useState(false);
+  const audio = new Audio('');
 
   const getpokemon = async () => {
     try {
-      const req = await fetch(`https://pokeapi.co/api/v2/pokemon/${Math.floor(Math.random() * 100)}/`);
-     
+      setload(true);
+      const req = await fetch(`https://pokeapi.co/api/v2/pokemon/${Math.floor(Math.random() * 200)}/`);
       const res = await req.json();
       const imgUrl = res.sprites.other.dream_world.front_default;
-     
+
       setPokemon({
         img: imgUrl,
         species: res.species.name,
       });
-      setStatus(true); 
+      setload(false);
+      setStatus(true);
     } catch (error) {
       console.error('Error fetching data:', error);
     }
   };
-
 
   useEffect(() => {
     getpokemon();
@@ -30,26 +32,45 @@ function Sample() {
     if (status) {
       const timer = setTimeout(() => {
         setStatus(false); 
-      }, 5000);
+      }, 10000);
 
       return () => clearTimeout(timer);
     }
   }, [status]);
 
   const mystyle = {
-    filter: !status ? "brightness(100%)" : "brightness(0.05)"
+    filter: !status ? "brightness(100%)" : "brightness(0.03)"
   };
 
   const handleNextClick = () => {
     getpokemon();
+    audio.pause(); // Pause audio when fetching new Pokemon
+  };
+
+  const handleInputChange = (e) => {
+    if (e.target.value === pokemon.species) {
+      setStatus(false);
+      audio.play(); 
+    } else {
+      setStatus(true);
+      audio.pause(); // Pause audio if the entered name is incorrect
+    }
   };
 
   return (
     <>
       <div className="App">
         <h1>Poki-dex</h1>
-        {pokemon.img && <img src={pokemon.img} style={mystyle} alt="" />}
-        <h2>{pokemon.species}</h2>
+        {!load ?
+          pokemon.img && <img src={pokemon.img} style={mystyle} alt="" /> : <h2>loading.........</h2>
+        }
+        <h2>{pokemon.species} </h2>
+        <input
+          type="text"
+          onChange={handleInputChange}
+          name=""
+          id=""
+        />
         <button onClick={handleNextClick}>Next</button>
       </div>
     </>

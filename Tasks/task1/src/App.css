@@ -11,7 +11,7 @@ body{
 }
 
 img{
-  transition: .3s ease-in-out;
+  transition: .3s ease-out;
 }
 
 @media (prefers-reduced-motion: no-preference) {
