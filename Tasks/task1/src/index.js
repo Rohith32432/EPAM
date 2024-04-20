@@ -3,14 +3,18 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-
+import { BrowserRouter } from 'react-router-dom';
 import Exam from './Exam';
 import Sample from './sample';
+import Tweet from './Tweet';
+import Main from './examples/Main';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <Sample/>
+      <BrowserRouter>
+    <Main/>
+      </BrowserRouter>  
   </React.StrictMode>
 );
 

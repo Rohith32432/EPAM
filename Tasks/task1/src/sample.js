@@ -4,7 +4,7 @@ function Sample() {
   const [pokemon, setPokemon] = useState({});
   const [status, setStatus] = useState(false);
   const [load, setload] = useState(false);
-  const audio = new Audio('');
+  // const audio = new Audio('');
 
   const getpokemon = async () => {
     try {
@@ -44,16 +44,15 @@ function Sample() {
 
   const handleNextClick = () => {
     getpokemon();
-    audio.pause(); // Pause audio when fetching new Pokemon
+    // audio.pause(); // Pause audio when fetching new Pokemon
   };
 
   const handleInputChange = (e) => {
     if (e.target.value === pokemon.species) {
       setStatus(false);
-      audio.play(); 
+    
     } else {
       setStatus(true);
-      audio.pause(); // Pause audio if the entered name is incorrect
     }
   };
 
